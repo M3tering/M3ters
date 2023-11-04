@@ -8,7 +8,7 @@ import "./interfaces/IM3ter.sol";
 
 /// @custom:security-contact info@whynotswitch.com
 contract M3ter is XRC721, IM3ter {
-    uint256 public constant REGISTRAR_ROLE = keccak256("REGISTRAR_ROLE");
+    bytes32 public constant REGISTRAR_ROLE = keccak256("REGISTRAR_ROLE");
     uint256 public mintFee = 250 * 10 ** 18;
 
     using Counters for Counters.Counter;
