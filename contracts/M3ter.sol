@@ -6,7 +6,7 @@ import "./interfaces/IM3ter.sol";
 import "./XRC721.sol";
 
 /// @custom:security-contact info@whynotswitch.com
-contract TestM3ter is XRC721, IM3ter {
+contract M3ter is XRC721, IM3ter {
     bytes32 public constant REGISTRAR_ROLE = keccak256("REGISTRAR_ROLE");
 
     using Counters for Counters.Counter;
