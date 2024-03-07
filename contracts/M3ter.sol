@@ -12,29 +12,37 @@ contract M3ter is XRC721, IM3ter {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
-    mapping(uint256 => uint256) public tokenRegistry;
-    mapping(uint256 => uint256) public keyDirectory;
+    mapping(uint256 => Attribute) public attributes;
 
     constructor() ERC721("M3ter", "M3R") {
-
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(REGISTRAR_ROLE, msg.sender);
         _grantRole(PAUSER_ROLE, msg.sender);
         _tokenIdCounter.increment();
     }
 
-    function mint() external onlyRole(REGISTRAR_ROLE) whenNotPaused {
-        _safeMint(msg.sender, _tokenIdCounter.current());
+    function mint(address to) external onlyRole(REGISTRAR_ROLE) whenNotPaused {
+        _safeMint(to, _tokenIdCounter.current());
         _tokenIdCounter.increment();
+    }
+
+    function exists(uint256 tokenId) external view returns (bool) {
+        return _exists(tokenId);
     }
 
     function _register(
         uint256 tokenId,
-        uint256 publicKey
+        uint256 publicKey,
+        string calldata arweaveTag
     ) external onlyRole(REGISTRAR_ROLE) {
         if (!_exists(tokenId)) revert NonexistentM3ter();
-        emit Register(tokenId, publicKey, block.timestamp, msg.sender);
-        tokenRegistry[tokenId] = publicKey;
-        keyDirectory[publicKey] = tokenId;
+        attributes[tokenId] = Attribute(publicKey, arweaveTag);
+        emit Register(
+            tokenId,
+            publicKey,
+            arweaveTag,
+            block.timestamp,
+            msg.sender
+        );
     }
 }
