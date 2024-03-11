@@ -9,9 +9,9 @@ module.exports = {
       port: 8545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
     },
-    testnet: {
-      provider: () => new HDWalletProvider(IOTEX_PRIVATE_KEY, "https://babel-api.testnet.iotex.io", 0, 2),
-      network_id: 4690,    // IOTEX mainnet chain id 4689, testnet is 4690
+    gnosis: {
+      provider: () => new HDWalletProvider(PRIVATE_KEY, "https://gnosis-rpc.publicnode.com", 0, 2),
+      network_id: 100,
       gas: 8500000,
       gasPrice: 1000000000000,
       skipDryRun: true
