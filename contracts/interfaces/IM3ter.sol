@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
-import "@openzeppelin/contracts@4.9.3/token/ERC721/IERC721.sol";
+pragma solidity ^0.8.24;
+import "@openzeppelin/contracts@5.0.2/interfaces/IERC721.sol";
 
 interface IM3ter is IERC721 {
-    error NonexistentM3ter();
-
     event Register(
         uint256 indexed tokenId,
         uint256 indexed publicKey,
@@ -18,9 +16,7 @@ interface IM3ter is IERC721 {
         string arweaveTag;
     }
 
-    function mint(address to) external;
-
-    function exists(uint256 tokenId) external returns (bool);
+    function safeMint(address to, string memory uri) external;
 
     function _register(
         uint256 tokenId,
