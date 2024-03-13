@@ -5,7 +5,7 @@ import "@openzeppelin/contracts@5.0.2/interfaces/IERC721.sol";
 interface IM3ter is IERC721 {
     event Register(
         uint256 indexed tokenId,
-        uint256 indexed publicKey,
+        string indexed publicKey,
         uint256 timestamp,
         address from
     );
@@ -14,6 +14,6 @@ interface IM3ter is IERC721 {
 
     function _register(
         uint256 tokenId,
-        uint256 publicKey
+        string calldata publicKey
     ) external;
 }
