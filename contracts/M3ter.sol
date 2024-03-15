@@ -9,8 +9,8 @@ contract M3ter is XRC721, IM3ter {
     bytes32 public constant REGISTRAR_ROLE = keccak256("REGISTRAR_ROLE");
     uint256 private _nextTokenId;
 
-    mapping(uint256 => string) public token_to_key;
-    mapping(string => uint256) public key_to_koken;
+    mapping(uint256 => bytes32) public token_to_key;
+    mapping(bytes32 => uint256) public key_to_koken;
 
     constructor() ERC721("M3ter", "M3R") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
@@ -30,15 +30,10 @@ contract M3ter is XRC721, IM3ter {
 
     function _register(
         uint256 tokenId,
-        string calldata publicKey
+        bytes32 publicKey
     ) external onlyRole(REGISTRAR_ROLE) {
         token_to_key[tokenId] = publicKey;
         key_to_koken[publicKey] = tokenId;
-        emit Register(
-            tokenId,
-            publicKey,
-            block.timestamp,
-            msg.sender
-        );
+        emit Register(tokenId, publicKey, msg.sender, block.timestamp);
     }
 }
