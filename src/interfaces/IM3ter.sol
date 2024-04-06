@@ -12,5 +12,5 @@ interface IM3ter is IERC721 {
 
     function safeMint(address to, string memory uri) external;
 
-    function register(uint256 tokenId, bytes32 publicKey) external;
+    function _register(uint256 tokenId, bytes32 publicKey) external;
 }

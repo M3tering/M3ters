@@ -17,10 +17,6 @@ abstract contract ERC721ABC is
 {
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
 
-    function _baseURI() internal pure override returns (string memory) {
-        return "https://ar-io.net/";
-    }
-
     function pause() public onlyRole(PAUSER_ROLE) {
         _pause();
     }
