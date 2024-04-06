@@ -8,7 +8,7 @@ import "@openzeppelin/contracts@5.0.2/token/ERC721/extensions/ERC721URIStorage.s
 import "@openzeppelin/contracts@5.0.2/token/ERC721/extensions/ERC721Pausable.sol";
 import "@openzeppelin/contracts@5.0.2/access/AccessControl.sol";
 
-abstract contract XRC721 is
+abstract contract ERC721ABC is
     ERC721,
     ERC721Enumerable,
     ERC721URIStorage,

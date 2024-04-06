@@ -2,10 +2,10 @@
 pragma solidity ^0.8.24;
 
 import "./interfaces/IM3ter.sol";
-import "./XRC721.sol";
+import "./ERC721ABC.sol";
 
 /// @custom:security-contact info@whynotswitch.com
-contract M3ter is XRC721, IM3ter {
+contract M3ter is ERC721ABC, IM3ter {
     bytes32 public constant REGISTRAR_ROLE = keccak256("REGISTRAR_ROLE");
     uint256 private _nextTokenId;
 
