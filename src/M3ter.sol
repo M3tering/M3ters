@@ -13,28 +13,22 @@ contract M3ter is ERC721ABC, IM3ter {
     mapping(uint256 => bytes32) public keyByToken;
     mapping(bytes32 => uint256) public tokenByKey;
 
-    constructor() ERC721("M3ter", "M3R") {
+    constructor() ERC721("M3ter", "{*_*}") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(REGISTRAR_ROLE, msg.sender);
         _grantRole(MINTER_ROLE, msg.sender);
         _grantRole(PAUSER_ROLE, msg.sender);
     }
 
-    function safeMint(
-        address to,
-        string memory uri
-    ) external onlyRole(MINTER_ROLE) whenNotPaused {
+    function safeMint(address to, string memory uri) external onlyRole(MINTER_ROLE) whenNotPaused {
         uint256 tokenId = nextTokenId++;
         _setTokenURI(tokenId, uri);
         _safeMint(to, tokenId);
     }
 
-    function _register(
-        uint256 tokenId,
-        bytes32 publicKey
-    ) external onlyRole(REGISTRAR_ROLE) whenNotPaused {
+    function _register(uint256 tokenId, bytes32 publicKey) external onlyRole(REGISTRAR_ROLE) whenNotPaused {
+        emit Register(tokenId, publicKey, msg.sender, block.timestamp);
         keyByToken[tokenId] = publicKey;
         tokenByKey[publicKey] = tokenId;
-        emit Register(tokenId, publicKey, msg.sender, block.timestamp);
     }
 }
